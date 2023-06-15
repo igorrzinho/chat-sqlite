@@ -20,6 +20,18 @@ async function AllChats() {
   });
 }
 
+async function SelectId(id) {
+  return openDb().then((db) => {
+    return db
+      .all(
+        `SELECT id1, id2 FROM chat
+         WHERE id = ?`,
+        [id]
+      )
+      .then((res) => res);
+  });
+}
+
 // messages
 async function CreateTableMessage() {
   openDb().then((db) => {
@@ -72,4 +84,5 @@ module.exports = {
   NewMessage,
   SelectMessages,
   SelectMessageId,
+  SelectId,
 };

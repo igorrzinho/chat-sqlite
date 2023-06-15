@@ -6,6 +6,7 @@ const {
   NewMessage,
   SelectMessages,
   SelectMessageId,
+  SelectId,
 } = require('../controller/chat.js');
 
 router.get('/', (req, res) => {
@@ -22,6 +23,12 @@ router.get('/allchats', async (req, res) => {
   let chats = await AllChats();
   console.log(chats);
   res.json(chats);
+});
+
+router.get('/selectId/:idChat', async (req, res) => {
+  let { idChat } = req.params;
+  let ids = await SelectId(idChat);
+  res.status(200).json(ids);
 });
 
 // messages
@@ -43,4 +50,5 @@ router.get('/selectMessageId/:idChat', async (req, res) => {
   let messages = await SelectMessageId(idChat);
   res.status(200).json(messages);
 });
+
 module.exports = router;
